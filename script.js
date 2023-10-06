@@ -65,7 +65,7 @@ function handleDOMContentLoladed(e) {
   //   upon form submission
   weatherForm.addEventListener("submit", (e) => {
     // prevent default refresh behavior
-    e.preventDefault();1
+    e.preventDefault();
 
     // grab input value
     const placeValue = document.querySelector("#place").value;
