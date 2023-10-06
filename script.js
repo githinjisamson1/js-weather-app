@@ -1,8 +1,11 @@
 function displayWeatherDetails(data) {
-  console.log(data);
+  // grab element
   const weatherDetails = document.querySelector("#weather-details");
 
+  //   create element
   const divChild = document.createElement("div");
+
+  //   manipulate dom
   divChild.innerHTML = `
   <div id="forecast">
   <div>
@@ -16,20 +19,25 @@ function displayWeatherDetails(data) {
   weatherDetails.appendChild(divChild);
 }
 
+// combines url and params into 1 URL
 function bindUrlWithParams(url, params) {
   const queryString = new URLSearchParams(params).toString();
   return `${url}?${queryString}`;
 }
 
 function fetchWeatherDetails(placeValue) {
+  // query params as an object/how to pass many params
   const queryParams = {
     q: `${placeValue}`,
   };
 
+  //   endpoint to fetch data from
   const urlApi = `https://weatherapi-com.p.rapidapi.com/current.json`;
 
+  //   invoke and store in variable, URL
   const urlWitParams = bindUrlWithParams(urlApi, queryParams);
 
+  //   fetch API - 1
   fetch(urlWitParams, {
     method: "GET",
     headers: {
@@ -43,21 +51,31 @@ function fetchWeatherDetails(placeValue) {
       return response.json();
     })
     .then((data) => {
+      // invoke upon receiving data
       displayWeatherDetails(data);
     })
-    .catch();
+    .catch((err) => {
+      console.log(err.message);
+    });
 }
 
 function handleDOMContentLoladed(e) {
   const weatherForm = document.querySelector("#weather-form");
 
+  //   upon form submission
   weatherForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+    // prevent default refresh behavior
+    e.preventDefault();1
 
+    // grab input value
     const placeValue = document.querySelector("#place").value;
 
     fetchWeatherDetails(placeValue);
+
+    // clear form value
+    e.target.reset();
   });
 }
 
+// wait HTML to load first
 document.addEventListener("DOMContentLoaded", handleDOMContentLoladed);
