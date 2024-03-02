@@ -15,4 +15,4 @@ i.e., weather icon, name of location and temperature
 
 ## Live
 
-The site is live at: "https://githinjisamson1.github.io/weather-app/"
+The site is live at: "https://js-weather-app-virid.vercel.app"
